@@ -1,8 +1,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Classroom</title>
-    <meta name="description" content="Classroom — Networked-Aframe">
+    <title>Loft at the beach</title>
+    <meta name="description" content="Loft — Networked-Aframe">
 
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
@@ -15,16 +15,15 @@
   </head>
   <body>
     <a-scene networked-scene="
-      room: Classroom;
+      room: Loft;
       debug: true;
       adapter: webrtc;
       audio: true;
     ">
       <a-assets>
-
-        <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
-        <a-asset-item id="Classroom" src="classroom-scene/scene.gltf"></a-asset-item>
-        <img id="sky" src="classroom-scene/images/Alps_PointedAndey.jpg">
+        
+        <a-asset-item id="loft-beach" src="loft-scene/scene.gltf"></a-asset-item>
+        <img id="sky" src="loft-scene/images/tintamarre-island.jpg">
 
         <!-- Templates -->
 
@@ -69,10 +68,10 @@
 
       <a-entity id="player"
         networked="template:#avatar-template;attachTemplateToLocal:false;"
-        camera        
         rotation="0 0 0" 
-        position="0 4 4"
-        spawn-in-circle="radius:3"
+        position="2 1 -9"
+        camera
+        spawn-in-circle="radius:0"
         wasd-controls look-controls
         >
         <a-sphere class="head"
@@ -83,11 +82,11 @@
 
       
 
-      <a-entity scale="0.1 0.1 0.1" gltf-model="#Classroom"></a-entity>
+      <a-entity gltf-model="#loft-beach" rotation="0 180 0" ></a-entity>
 
       
-
-      <a-sky src="#sky"></a-sky>
+ 
+      <a-sky src="#sky" rotation="0 150 0"></a-sky>
       <!-- <a-entity id="particles" particle-system="preset: snow"></a-entity> -->
     </a-scene>
 
