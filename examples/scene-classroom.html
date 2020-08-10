@@ -1,8 +1,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Castle Village</title>
-    <meta name="description" content="Dev Example — Networked-Aframe">
+    <title>Classroom</title>
+    <meta name="description" content="Classroom — Networked-Aframe">
 
     <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
@@ -15,7 +15,7 @@
   </head>
   <body>
     <a-scene networked-scene="
-      room:  Classroom;
+      room: Classroom;
       debug: true;
       adapter: webrtc;
       audio: true;
@@ -23,7 +23,7 @@
       <a-assets>
 
         <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
-        <a-asset-item id="Classroom" src="lassroom-scene/scene.gltf"></a-asset-item>
+        <a-asset-item id="Classroom" src="classroom-scene/scene.gltf"></a-asset-item>
         <img id="sky" src="classroom-scene/images/Alps_PointedAndey.jpg">
 
         <!-- Templates -->
@@ -69,8 +69,9 @@
 
       <a-entity id="player"
         networked="template:#avatar-template;attachTemplateToLocal:false;"
-        camera
-        position="0 1.5 50"
+        camera        
+        rotation="0 0 0" 
+        position="0 4 4"
         spawn-in-circle="radius:3"
         wasd-controls look-controls
         >
@@ -82,7 +83,7 @@
 
       
 
-      <a-entity gltf-model="#Classroom"></a-entity>
+      <a-entity scale="0.1 0.1 0.1" gltf-model="#Classroom"></a-entity>
 
       
 
