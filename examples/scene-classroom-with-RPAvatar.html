@@ -24,7 +24,7 @@
         
         <a-asset-item id="Classroom" src="classroom-scene/scene.gltf"></a-asset-item>
         <img id="sky" src="classroom-scene/images/Alps_PointedAndey.jpg">
-        <a-asset-item id="RPAvatar" src="head_bases_mesh/scene.gltf"></a-asset-item>
+        <a-asset-item id="RPAvatar" src="head_base_mesh/scene.gltf"></a-asset-item>
 
         <!-- Templates -->
 
@@ -32,7 +32,8 @@
         
         <template id="avatar-template">
           <a-entity class="avatar" networked-audio-source>
-            <a-entity position="0 -2.5 0" rotation="0 180 0" scale="4 4 4" gltf-model="#RPAvatar"></a-entity>
+            <!-- <a-entity position="0 -2.5 0" rotation="0 180 0" scale="4 4 4" gltf-model="#RPAvatar"></a-entity> -->
+            <a-entity position="0 0 0" rotation="0 0 0" scale="0.5 0.5 0.5" gltf-model="#RPAvatar"></a-entity>
           </a-entity>
         </template>
         <!--
