@@ -7,6 +7,7 @@
   },
   "author": "YOUR_NAME",
   "dependencies": {
+    "aframe-asset-on-demand-component": "^1.0.3",
     "networked-aframe": "^0.7.1"
   }
 }
