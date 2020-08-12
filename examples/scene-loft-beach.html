@@ -6,10 +6,10 @@
 
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
-    <script src="/build.js"></script>
+    
     <script>window.NAF || document.write('<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js">\x3C/script>')</script>
 
-    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script> -->
     <!-- <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script> -->
     <script src="/js/spawn-in-circle.component.js"></script>
   </head>
@@ -24,10 +24,21 @@
         
         <a-asset-item id="loft-beach" src="loft-scene/scene.gltf"></a-asset-item>
         <img id="sky" src="loft-scene/images/tintamarre-island.jpg">
+        <a-asset-item id="DefaultAvatar" src="avatars/avatar_Josephine_noHands.glb"></a-asset-item>
 
         <!-- Templates -->
 
         <!-- Avatar -->
+
+        <template id="avatar-template">
+          <a-entity class="avatar" networked-audio-source>
+            <a-entity class="head" position="0 -2.5 0" rotation="0 180 0" scale="4 4 4" gltf-model="#DefaultAvatar"></a-entity> 
+            <!-- <a-entity class="playerhead" position="0 0 0" rotation="0 0 0" scale="0.5 0.5 0.5" gltf-model="#DefaultAvatar"></a-entity> -->
+          </a-entity>
+        </template>
+
+        
+        <!--
         <template id="avatar-template">
           <a-entity class="avatar" networked-audio-source>
             <a-sphere class="head"
@@ -61,7 +72,7 @@
               </a-sphere>
             </a-entity>
           </a-entity>
-        </template>
+        </template> -->
 
         <!-- /Templates -->
       </a-assets>
@@ -91,8 +102,8 @@
     </a-scene>
 
    
-   
-  
+       
+    <script src="/build.js"></script>
     <script>
       // On mobile remove elements that are resource heavy
       var isMobile = AFRAME.utils.device.isMobile();
@@ -109,8 +120,7 @@
           'rotation',
           {
             selector: '.head',
-            component: 'material',
-            property: 'color'
+            component: 'gltf-model' 
           }
         ]
       });
