@@ -36,23 +36,21 @@ update: function() {
 	var gltf;
 	if(urlParams.has("avatar") === true ){
 		var result = urlParams.get("avatar");
-		if(result == "1"){ gltf = "url(./avatars/joyce.glb)";
+		if(result == "1"){ 		 gltf = "url(./avatars/avatar_joyce_noHands.glb)";
+		}else if(result == "2"){ gltf = "url(./avatars/avatar_Josephine_noHands.glb)";
+		}else if(result == "3"){ gltf = "url(./avatars/avatar_robert_noHands.glb)";
 		}else{
 			gltf = "#DefaultAvatar";
 		}
-		//this.el.setAttribute("gltf-model", gltf);
-		this.el.setAttribute("position", '0 -2.5 0');
+		this.el.setAttribute("gltf-model", gltf);
+		//this.el.setAttribute("position", '0 -2.5 0');
 		//this.el.setAttribute("rotation", '0 180 0');
 		//this.el.setAttribute("scale", '4 4 4');
 	}else{
 	
 		gltf = "#DefaultAvatar";
-		var elem = document.getElementById("playerhead");
-		if(elem){
-			this.el.setAttribute("gltf-model", gltf);
-		}else{
-			console.log("nee");
-		}
+		this.el.setAttribute("gltf-model", gltf);
+		
 	
 	}
 
