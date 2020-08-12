@@ -39,6 +39,9 @@ update: function() {
 		if(result == "1"){ 		 gltf = "url(./avatars/avatar_joyce_noHands.glb)";
 		}else if(result == "2"){ gltf = "url(./avatars/avatar_Josephine_noHands.glb)";
 		}else if(result == "3"){ gltf = "url(./avatars/avatar_robert_noHands.glb)";
+		}else if(result == "4"){ gltf = "url(./avatars/avatar_caroline_noHands.glb)";
+		}else if(result == "5"){ gltf = "url(./avatars/avatar_Frans_noHands.glb)";
+		}else if(result == "6"){ gltf = "url(./avatars/avatar_phoebe_noHands.glb)";
 		}else{
 			gltf = "#DefaultAvatar";
 		}
