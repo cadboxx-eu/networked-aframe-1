@@ -3,20 +3,19 @@
     <meta charset="utf-8">
     <title>Classroom</title>
     <meta name="description" content="Classroom — Networked-Aframe">
-
+    
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>   
     
     <script>window.NAF || document.write('<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js">\x3C/script>')</script>
 
-    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-    <!-- <script src="/build.js"></script> -->
+    <!-- <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script> -->
     <!-- <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script> -->
     <script src="/js/spawn-in-circle.component.js"></script>
   </head>
   <body>
     <a-scene networked-scene="
-      room: Classroom;
+      room: Classroom2;
       debug: true;
       adapter: webrtc;
       audio: true;
@@ -24,11 +23,22 @@
       <a-assets>
         
         <a-asset-item id="Classroom" src="classroom-scene/scene.gltf"></a-asset-item>
-        <img id="sky" src="classroom-scene/images/Alps_PointedAndey.jpg">        
+        <img id="sky" src="classroom-scene/images/Alps_PointedAndey.jpg">
+        <a-asset-item id="DefaultAvatar" src="avatars/avatar_Josephine_noHands.glb"></a-asset-item>
+
 
         <!-- Templates -->
 
-        <!-- Avatar -->        
+        <!-- Avatar -->
+        
+        <template id="avatar-template">
+          <a-entity class="avatar" networked-audio-source>
+            <a-entity class="head" position="0 -2.5 0" rotation="0 180 0" scale="4 4 4" gltf-model="#DefaultAvatar"></a-entity> 
+            <!-- <a-entity class="playerhead" position="0 0 0" rotation="0 0 0" scale="0.5 0.5 0.5" gltf-model="#DefaultAvatar"></a-entity> -->
+          </a-entity>
+        </template>
+
+        <!--
         <template id="avatar-template">
           <a-entity class="avatar" networked-audio-source>
             <a-sphere class="head"
@@ -63,9 +73,12 @@
             </a-entity>
           </a-entity>
         </template>
+        -->
         
         <!-- /Templates -->
       </a-assets>
+      <!-- <a-box asset-on-demand="src: avatars/joyce.glb" fallback='#DefaultAvatar'></a-box> -->
+
 
       <a-entity id="player"
         networked="template:#avatar-template;attachTemplateToLocal:false;"
@@ -75,16 +88,16 @@
         spawn-in-circle="radius:3"
         wasd-controls look-controls
         >
-        <a-sphere class="head"
+        <a-entity class="head"
           visible="false"
-          random-color
-        ></a-sphere>
+          pick-model                    
+        ></a-entity>
       </a-entity>
 
       
 
       <a-entity scale="0.1 0.1 0.1" gltf-model="#Classroom"></a-entity>
-
+      <!-- <a-entity gltf-model="#DefaultAvatar"></a-entity> -->
       
 
       <a-sky src="#sky"></a-sky>
@@ -93,18 +106,17 @@
 
    
    
-  
+    <script src="/build.js"></script>
+    <script>
+      //var res = document.getElementById("playerhead")
+      //console.log(res.getAttribute('position')); 
+
+    </script>
     <script>
       // On mobile remove elements that are resource heavy
       var isMobile = AFRAME.utils.device.isMobile();
 
      
-    </script>
-
-    <script>
-      var elem = document.getElementById("avatarhead");
-      console.log(elem.getAttribute('material'));
-
     </script>
 
     <script>
@@ -116,9 +128,8 @@
           'rotation',
           {
             selector: '.head',
-            component: 'material',
-            property: 'color'
-          }
+            component: 'gltf-model'            
+          }          
         ]
       });
 

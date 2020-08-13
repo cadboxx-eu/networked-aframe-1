@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <title>Loft at the Beach</title>
-    <meta name="description" content="Loft at the Beach — Networked-Aframe">
+    <meta name="description" content="Business Loft — Networked-Aframe">
 
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
@@ -15,7 +15,7 @@
   </head>
   <body>
     <a-scene networked-scene="
-      room: Loft;
+      room: Loft-business;
       debug: true;
       adapter: webrtc;
       audio: true;
@@ -23,7 +23,7 @@
       <a-assets>
         
         <a-asset-item id="loft-beach" src="loft-scene/scene.gltf"></a-asset-item>
-        <img id="sky" src="loft-scene/images/tintamarre-island.jpg">
+        <img id="sky" src="loft-scene/images/lac-barbue.jpg">
         <a-asset-item id="DefaultAvatar" src="avatars/avatar_Josephine_noHands.glb"></a-asset-item>
 
         <!-- Templates -->
@@ -80,7 +80,7 @@
       <a-entity id="player"
         networked="template:#avatar-template;attachTemplateToLocal:false;"
         rotation="0 0 0" 
-        position="2 2 -24"
+        position="2 2 -2"
         camera
         spawn-in-circle="radius:0"
         wasd-controls look-controls
@@ -97,7 +97,7 @@
 
       
  
-      <a-sky src="#sky" rotation="0 0 0"></a-sky>
+      <a-sky src="#sky" rotation="0 75 0"></a-sky>
       <!-- <a-entity id="particles" particle-system="preset: snow"></a-entity> -->
     </a-scene>
 
