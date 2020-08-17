@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Atmosphere-lounge</title>
+    <meta name="description" content="Atmosphere Loung — Networked-Aframe">
+    
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>   
+    
+    <script>window.NAF || document.write('<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js">\x3C/script>')</script>
+
+    <!-- <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script> -->
+    <script src="/js/spawn-in-circle.component.js"></script>
+  </head>
+  <body>
+    <a-scene networked-scene="
+      room: Atmosphere-Loung;
+      debug: true;
+      adapter: webrtc;
+      audio: true;
+    ">
+      <a-assets>
+        
+        <a-asset-item id="lounge" src="Atmosphere-Lounge-Scene/scene.gltf"></a-asset-item>
+        <img id="sky" src="Atmosphere-Lounge-Scene/Moon-earth-stars.jpg">
+        <a-asset-item id="DefaultAvatar" src="avatars/avatar_Josephine_noHands.glb"></a-asset-item>
+
+
+        <!-- Templates -->
+
+        <!-- Avatar -->
+        
+        <template id="avatar-template">
+          <a-entity class="avatar" networked-audio-source>
+            <a-entity class="head" position="0 -2.5 0" rotation="0 180 0" scale="4 4 4" gltf-model="#DefaultAvatar"></a-entity> 
+            <!-- <a-entity class="playerhead" position="0 0 0" rotation="0 0 0" scale="0.5 0.5 0.5" gltf-model="#DefaultAvatar"></a-entity> -->
+          </a-entity>
+        </template>
+
+        <!--
+        <template id="avatar-template">
+          <a-entity class="avatar" networked-audio-source>
+            <a-sphere class="head"
+              color="#ffffff"
+              scale="0.45 0.5 0.4"
+            ></a-sphere>
+            <a-entity class="face"
+              position="0 0.05 0"
+            >
+              <a-sphere class="eye"
+                color="#efefef"
+                position="0.16 0.1 -0.35"
+                scale="0.12 0.12 0.12"
+              >
+                <a-sphere class="pupil"
+                  color="#000"
+                  position="0 0 -1"
+                  scale="0.2 0.2 0.2"
+                ></a-sphere>
+              </a-sphere>
+              <a-sphere class="eye"
+                color="#efefef"
+                position="-0.16 0.1 -0.35"
+                scale="0.12 0.12 0.12"
+              >
+                <a-sphere class="pupil"
+                  color="#000"
+                  position="0 0 -1"
+                  scale="0.2 0.2 0.2"
+                ></a-sphere>
+              </a-sphere>
+            </a-entity>
+          </a-entity>
+        </template>
+        -->
+        
+        <!-- /Templates -->
+      </a-assets>
+      <!-- <a-box asset-on-demand="src: avatars/joyce.glb" fallback='#DefaultAvatar'></a-box> -->
+
+
+      <a-entity id="player"
+        networked="template:#avatar-template;attachTemplateToLocal:false;"
+        camera        
+        rotation="0 0 0" 
+        position="0 4 4"
+        spawn-in-circle="radius:3"
+        wasd-controls look-controls
+        >
+        <a-entity class="head"
+          visible="false"
+          pick-model                    
+        ></a-entity>
+      </a-entity>
+
+      
+
+      <a-entity scale="1 1 1" position="0 1 0" gltf-model="#lounge"></a-entity>
+      <!-- <a-entity gltf-model="#DefaultAvatar"></a-entity> -->
+      
+
+      <a-sky src="#sky"></a-sky>
+      <!-- <a-entity id="particles" particle-system="preset: snow"></a-entity> -->
+    </a-scene>
+
+   
+   
+    <script src="/build.js"></script>
+    <script>
+      //var res = document.getElementById("playerhead")
+      //console.log(res.getAttribute('position')); 
+
+    </script>
+    <script>
+      // On mobile remove elements that are resource heavy
+      var isMobile = AFRAME.utils.device.isMobile();
+
+     
+    </script>
+
+    <script>
+      // Define custom schema for syncing avatar color, set by random-color
+      NAF.schemas.add({
+        template: '#avatar-template',
+        components: [
+          'position',
+          'rotation',
+          {
+            selector: '.head',
+            component: 'gltf-model'            
+          }          
+        ]
+      });
+
+      // Called by Networked-Aframe when connected to server
+      function onConnect () {
+        console.log("onConnect", new Date());
+      }
+    </script>
+  </body>
+</html>
